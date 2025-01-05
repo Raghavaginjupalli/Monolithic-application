@@ -1,0 +1,48 @@
+package com.project.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.project.feign.QuizInterface;
+import com.project.model.QuestionWrapper;
+import com.project.model.Quiz;
+import com.project.model.Response;
+import com.project.repo.QuizRepo;
+
+import java.util.List;
+
+
+@Service
+public class QuizService {
+
+    @Autowired
+    QuizRepo quizRepo;
+    
+    @Autowired
+    QuizInterface quizInterface;
+
+    public ResponseEntity<String> createQuiz(String category, String title) {
+    	List<Integer> questions= quizInterface.getQuestionsForQuiz(category).getBody();
+    	
+    	Quiz quiz = new Quiz();
+    	quiz.setTitle(title);
+    	quiz.setQuestionIds(questions);
+    	quizRepo.save(quiz);
+        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+
+    }
+
+    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
+		return null;
+
+
+    }
+
+    public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
+		return null;
+    	
+    }
+}

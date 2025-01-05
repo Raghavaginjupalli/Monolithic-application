@@ -1,0 +1,4 @@
+#Fri Jan 03 23:25:24 CST 2025
+__DEFAULT__=false
+expression=commons-logging.jar
+org.eclipse.help.ui.localSearch.master=true
